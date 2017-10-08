@@ -10,15 +10,15 @@ public class Main {
         double averageDiameter = 0;
         double averageDistance = 0;
         int distancesCount = 0;
-        int iterationsCount = 1000;
+        int iterationsCount = 1;
         Map<Integer, Integer> averageNdGistogram = new HashMap<>();
         for (int i = 0 ; i < iterationsCount ; i++) {
-            Map result = generateGraph(n, m);
+            Map result = performIteration(n, m);
             averageDiameter += (Integer)result.get("diameter");
-            List<Double> averageDistanceForComponent = (List<Double>) result.get("averageDistanceForComponent");
-            distancesCount += averageDistanceForComponent.size();
-            for (Double aDouble : averageDistanceForComponent) {
-                averageDistance += aDouble;
+            List<Double> averageDistancesForComponent = (List<Double>) result.get("averageDistancesForComponent");
+            distancesCount += averageDistancesForComponent.size();
+            for (Double averageDistanceForComponent : averageDistancesForComponent) {
+                averageDistance += averageDistanceForComponent;
             }
             Map<Integer, Integer> ndGistogram = (Map<Integer, Integer>) result.get("ndGistogram");
             for (Map.Entry<Integer, Integer> integerIntegerEntry : ndGistogram.entrySet()) {
@@ -29,8 +29,6 @@ public class Main {
                             averageNdGistogram.get(integerIntegerEntry.getKey()) + integerIntegerEntry.getValue());
                 }
             }
-
-
         }
         System.out.println(averageDiameter / iterationsCount);
         System.out.println(averageDistance / distancesCount);
@@ -41,7 +39,10 @@ public class Main {
 
     }
 
-    static Map generateGraph(int n, int m) {
+    /**
+     * Выполняется одна итерация, генерируется граф Gn1 и из него Gkm
+     */
+    static Map performIteration(int n, int m) {
         Graph graph = makeGn1(n);
         Graph gnmGraph = makeGnm(graph, n, m);
 
@@ -91,7 +92,7 @@ public class Main {
 
         Map<String, Object> result = new HashMap<>();
         result.put("diameter", diameter);
-        result.put("averageDistanceForComponent", averageDistances);
+        result.put("averageDistancesForComponent", averageDistances);
         result.put("ndGistogram", ndGistogram);
 
         return result;
@@ -121,6 +122,9 @@ public class Main {
         return sumOfDistances / distancesCount;
     }
 
+    /**
+     * Ищет путь от начальной вершины до всех остальных
+     */
     static List<Integer> findDistances(Graph graph, int startVertex) {
         // init distances
         List<Integer> distances = new ArrayList<>();
@@ -185,6 +189,9 @@ public class Main {
         return graph;
     }
 
+    /**
+     * Из графа Gn1 генерируется граф Gkm, где k = n/m
+     */
     static Graph makeGnm(Graph graph, int n, int m) {
         Graph gnmGraph = new Graph();
         int newGraphSize = n / m;
