@@ -1,4 +1,4 @@
-import java.math.BigInteger;\
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class ConvertToOnesSolution {
