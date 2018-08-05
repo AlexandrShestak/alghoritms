@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class ShortestPathProblemSolution {
 
     //max weight number is Math.pow(10, 8) which binary representation is 101 1111 0101 1110 0001 0000 0000
     //so max weight bit is 27
