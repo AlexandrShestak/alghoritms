@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Solution {
+public class Div64Solution {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String number = sc.nextLine();

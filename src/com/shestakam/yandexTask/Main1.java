@@ -5,7 +5,7 @@ class CharactersWithOriginalItem{
     String originalItem;
 }
 
-public class Main {
+public class Main1 {
 
     public static String[] testData = {"eat", "tea", "tan", "ate", "nat", "bat"};
 

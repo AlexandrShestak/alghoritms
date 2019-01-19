@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class DrivingTestSoluion {
 
     static final Set<Integer> SPEED_EVENTS = new HashSet<>(Arrays.asList(1, 3));
 
